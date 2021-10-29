@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  background-color: #161617;
+  overflow: hidden;
+}
+
+.gout {
+  position: absolute;
+  background-color: transparent;
+}
+
+.gout-1 {
+  width: 0.5px;
+  height: 20px;
+}
+
+.gout-2 {
+  width: 1px;
+  height: 40px;
+}
+
+.gout-3 {
+  width: 1.5px;
+  height: 60px;
+}
