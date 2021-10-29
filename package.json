@@ -9,6 +9,7 @@
     "prepare": "cp -a ./.githooks/. ./.git/hooks/"
   },
   "devDependencies": {
+    "@types/node": "^16.11.6",
     "prettier": "^2.4.1",
     "typescript": "^4.3.2",
     "vite": "^2.6.4"
