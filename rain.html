@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rain</title>
+  </head>
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #161617;
+      overflow: hidden;
+    }
+
+    .gout {
+      position: absolute;
+      background-color: transparent;
+    }
+
+    .gout-1 {
+      width: 0.5px;
+      height: 20px;
+    }
+
+    .gout-2 {
+      width: 1px;
+      height: 40px;
+    }
+
+    .gout-3 {
+      width: 1.5px;
+      height: 60px;
+    }
+  </style>
+
+  <body>
+    <div class="rain"></div>
+  </body>
+
+  <script>
+    //#region utils
+    const random = (limit) => Math.floor(Math.random() * limit);
+    function repeat(func, times) {
+      func();
+      times && times-- && repeat(func, times);
+    }
+    //#endregion
+
+    function newRain(gouts, size, velocity) {
+      const rainBackground = document.querySelector(".rain");
+      repeat(() => {
+        const gout = newGout(size, velocity);
+        rainBackground.appendChild(gout);
+      }, gouts);
+    }
+
+    function newGout(size, velocity) {
+      const gout = document.createElement("DIV");
+      const color = "rgb(106, 106, 155)";
+      gout.className = `gout gout-${size}`;
+      gout.style.left = `${random(100)}vw`;
+
+      const start = random(5000);
+      setTimeout(() => (gout.style.background = color), start + 500);
+      gout.animate([{ transform: `translateY(${100}vh)` }], {
+        duration: 1000 * velocity,
+        iterations: Infinity,
+        delay: start,
+      });
+      return gout;
+    }
+
+    newRain(250, 1, 1.25);
+    newRain(100, 2, 1);
+    newRain(50, 3, 0.35);
+
+    window.addEventListener("mousemove", interactiveMouse);
+
+    function interactiveMouse(event) {
+      const element = document.querySelector(".rain");
+      const mouseX = (event.pageX - window.innerWidth / 2) * -0.025;
+      element.style.transform = `translate(${mouseX}px)`;
+    }
+  </script>
+</html>
